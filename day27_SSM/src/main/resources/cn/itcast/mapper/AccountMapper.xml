@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:用于隔离Sql语句
+    在Mapper代理开发的时候,必须填写Mapper对应的JavaBean的全限定名
+-->
+<mapper namespace="cn.itcast.mapper.AccountMapper">
+    <!--id ：接口的方法名，因为是两个参数：要么传入pojo 要么使用@Param注解-->
+    <!--转入-->
+    <update id="transferIn">
+        update account set money=money + #{money} where name = #{inName};
+    </update>
+
+    <!--转出-->
+    <update id="transferOut">
+        update account set money=money - #{money} where name = #{outName};
+    </update>
+    
+</mapper>

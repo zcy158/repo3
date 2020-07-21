@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8" />
+    <script src="js/echarts.js"></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+<div id="mychart" style="width: 600px; height: 400px;"></div>
+</body>
+
+<script>
+    //1.获取echart对象 初始化
+    var echart = echarts.init(document.getElementById("mychart"));
+    //2.发送ajax请求请求后台, 回调函数中设置数据
+
+    //2.发送ajax请求请求后台, 回调函数中设置数据
+    function loadData(){
+        $.get("productList.action").done(function(data){
+            echart.setOption({
+                xAxis: {
+                    type: 'category',
+                    data: data.xData
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: data.seriesData,
+                    type: 'bar'
+                }]
+            });
+        })
+    }
+
+    window.setInterval(loadData,2000);
+
+</script>
+</html>
